@@ -9,9 +9,8 @@ batch:
 phases:
   install:
     commands:
-      - echo 'Installing Gradle'
-      - sudo apt update
-      - sudo apt install -y gradle
+      - echo 'Installing Gradle wrapper'
+      - curl -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/master/gradle/wrapper/gradle-wrapper.jar
   pre_build:
     commands:
       - echo 'prebuild'
