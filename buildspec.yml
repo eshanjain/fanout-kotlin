@@ -10,7 +10,8 @@ phases:
   install:
     commands:
       - echo 'Installing Gradle wrapper'
-      - curl -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/master/gradle/wrapper/gradle-wrapper.jar
+      - curl -L -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/master/gradle/wrapper/gradle-wrapper.jar
+      - ls -l gradle/wrapper/gradle-wrapper.jar
       - chmod +x gradlew
   pre_build:
     commands:
