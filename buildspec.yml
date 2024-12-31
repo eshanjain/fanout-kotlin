@@ -18,13 +18,13 @@ phases:
       - export PATH=$PATH:/usr/local/kotlinc/bin
       - kotlin -version
       - curl -O https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.8.2/junit-platform-console-standalone-1.8.2.jar
-      - kotlinc Calculator.kt CalculatorTest.kt -d classes -cp junit-platform-console-standalone-1.8.2.jar
   pre_build:
     commands:
       - echo 'prebuild'
   build:
     commands:
       - echo 'Running Kotlin Tests'
+      - kotlinc src/main/kotlin/*.kt src/test/kotlin/*.kt -d classes -cp junit-platform-console-standalone-1.8.2.jar
       - java -jar junit-platform-console-standalone-1.8.2.jar --class-path classes --scan-class-path
   post_build:
     commands:
