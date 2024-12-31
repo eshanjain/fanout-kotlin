@@ -17,8 +17,7 @@ phases:
       - echo 'prebuild'
   build:
     commands:
-      - echo 'Running Cucumber Tests'
-      - cucumber --init
+      - echo 'Running Kotlin Tests'
       - |
         codebuild-tests-run \
          --test-command "./gradlew test --info" \
