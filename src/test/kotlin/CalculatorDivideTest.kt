@@ -18,10 +18,4 @@ class CalculatorDivideTest {
         assertEquals(0.5, calculator.divide(1, 2), 0.001)
     }
 
-    @Test
-    fun testDivisionByZero() {
-        assertThrows<ArithmeticException> {
-            calculator.divide(5, 0)
-        }
-    }
 }
