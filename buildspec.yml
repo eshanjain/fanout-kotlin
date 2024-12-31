@@ -32,9 +32,9 @@ phases:
         codebuild-tests-run \
           --test-command '
             java -jar junit-platform-console-standalone-1.8.2.jar --class-path classes \
-              $(for file in "$CODEBUILD_CURRENT_SHARD_FILES"; do
-                 class_name=$(basename \"$file\" .kt)
-                 echo \"--select-class $class_name\"
+              $(for file in $CODEBUILD_CURRENT_SHARD_FILES; do
+                 class_name=$(basename "$file" .kt)
+                 echo "--select-class $class_name"
                done)
           ' \
           --files-search "codebuild-glob-search 'src/test/kotlin/*.kt'"
