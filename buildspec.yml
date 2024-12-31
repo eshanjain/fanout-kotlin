@@ -34,7 +34,7 @@ phases:
               $(for file in "$CODEBUILD_CURRENT_SHARD_FILES"; do
                  class_name=$(basename \"$file\" .kt)
                  echo \"--select-class $class_name\"
-               done)           
+               done)'        
          --files-search "codebuild-glob-search 'src/test/kotlin/*.kt'"
   post_build:
     commands:
