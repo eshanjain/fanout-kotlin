@@ -27,7 +27,7 @@ phases:
       - kotlinc src/main/kotlin/*.kt src/test/kotlin/*.kt -d classes -cp junit-platform-console-standalone-1.8.2.jar
       - find classes -name "*.class"
       - codebuild-glob-search "**/*.class"
-      - java -jar junit-platform-console-standalone-1.8.2.jar --class-path classes --select-class CalculatorAddTest --select-class CalculatorMultiplyTest
+      - java -jar junit-platform-console-standalone-1.8.2.jar --class-path classes --select-class CalculatorAddTest --select-class classes/CalculatorMultiplyTest
   post_build:
     commands:
       - echo "Test execution completed"
