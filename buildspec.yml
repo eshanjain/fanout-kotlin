@@ -11,7 +11,7 @@ phases:
     commands:
       - echo 'Installing Gradle'
       - sudo apt update
-      - sudo apt install gradle
+      - sudo apt install -y gradle
   pre_build:
     commands:
       - echo 'prebuild'
