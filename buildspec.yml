@@ -1,0 +1,28 @@
+version: 0.2
+
+batch:
+  fast-fail: false
+  build-fanout:
+    parallelism: 5
+    ignore-failure: false
+
+phases:
+  install:
+    commands:
+      - echo 'Installing Gradle'
+      - sudo apt update
+      - sudo apt install gradle
+  pre_build:
+    commands:
+      - echo 'prebuild'
+  build:
+    commands:
+      - echo 'Running Cucumber Tests'
+      - cucumber --init
+      - |
+        codebuild-tests-run \
+         --test-command "./gradlew test --info" \
+         --files-search "codebuild-glob-search '**/test/kotlin/*Test.kt'"
+  post_build:
+    commands:
+      - echo "Test execution completed"
