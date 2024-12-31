@@ -9,20 +9,19 @@ batch:
 phases:
   install:
     commands:
-      - echo 'Installing Gradle wrapper'
-      - curl -L -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/master/gradle/wrapper/gradle-wrapper.jar
-      - ls -l gradle/wrapper/gradle-wrapper.jar
-      - chmod +x gradlew
+      - echo 'Installing dependencies'
+      - curl -s "https://get.sdkman.io" | bash
+      - source "$HOME/.sdkman/bin/sdkman-init.sh"
+      - sdk install kotlin
+      - curl -O https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.8.2/junit-platform-console-standalone-1.8.2.jar
+      - kotlinc Calculator.kt CalculatorTest.kt -d classes -cp junit-platform-console-standalone-1.8.2.jar
   pre_build:
     commands:
       - echo 'prebuild'
   build:
     commands:
       - echo 'Running Kotlin Tests'
-      - |
-        codebuild-tests-run \
-         --test-command "./gradlew test --info" \
-         --files-search "codebuild-glob-search '**/test/kotlin/*Test.kt'"
+      - java -jar junit-platform-console-standalone-1.8.2.jar --class-path classes --scan-class-path
   post_build:
     commands:
       - echo "Test execution completed"
