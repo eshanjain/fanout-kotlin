@@ -25,9 +25,10 @@ phases:
     commands:
       - echo 'Running Kotlin Tests'
       - kotlinc src/main/kotlin/*.kt src/test/kotlin/*.kt -d classes -cp junit-platform-console-standalone-1.8.2.jar
-      - find classes -name "*.class"
-      - codebuild-glob-search "**/*.class"
-      - java -jar junit-platform-console-standalone-1.8.2.jar --class-path classes --select-class CalculatorAddSubtractTest
+      - |
+        codebuild-tests-run \
+          --test-command 'kotlinc src/main/kotlin/*.kt $(echo "$CODEBUILD_CURRENT_SHARD_FILES" | tr \"\n\" \" \") -d classes -cp junit-platform-console-standalone-1.8.2.jar'
+          --files-search "codebuild-glob-search 'src/test/kotlin/*.kt'"
       - |
         codebuild-tests-run \
           --test-command '
