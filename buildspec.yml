@@ -29,6 +29,7 @@ phases:
         codebuild-tests-run \
           --test-command 'kotlinc src/main/kotlin/*.kt $(echo "$CODEBUILD_CURRENT_SHARD_FILES" | tr "\n" " ") -d classes -cp junit-platform-console-standalone-1.8.2.jar' \
           --files-search "codebuild-glob-search 'src/test/kotlin/*.kt'"
+      - codebuild-glob-search "**/*.class"
       - |
         codebuild-tests-run \
           --test-command '
